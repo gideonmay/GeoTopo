@@ -2,6 +2,7 @@
 // Based on "Computation of Rotation Minimizing Frames" Wang et al. 2008
 
 #include <vector>
+#include <cmath>
 typedef unsigned int uint;
 
 #define ZERO_NORM 1e-7
@@ -146,8 +147,8 @@ public:
         static Frame fromT(const Vector3& T) { Vector3 R = orthogonalVector(T.normalized()).normalized(); return fromTR(T,R); }
 
         static Vector3 orthogonalVector(const Vector3& n) {
-            if ((abs(n.y()) >= 0.9 * abs(n.x())) && abs(n.z()) >= 0.9 * abs(n.x())) return Vector3(0.0, -n.z(), n.y());
-            else if ( abs(n.x()) >= 0.9 * abs(n.y()) && abs(n.z()) >= 0.9 * abs(n.y()) ) return Vector3(-n.z(), 0.0, n.x());
+            if ((std::abs(n.y()) >= 0.9 * std::abs(n.x())) && std::abs(n.z()) >= 0.9 * std::abs(n.x())) return Vector3(0.0, -n.z(), n.y());
+            else if ( std::abs(n.x()) >= 0.9 * std::abs(n.y()) && std::abs(n.z()) >= 0.9 * std::abs(n.y()) ) return Vector3(-n.z(), 0.0, n.x());
             else return Vector3(-n.y(), n.x(), 0.0);
         }
 

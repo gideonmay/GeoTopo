@@ -191,7 +191,7 @@ public: // methods
 		// Check for the goal, once we pop that we're done
 		if( n->m_UserState.IsGoal() )
 		{
-			if (solutions.size() >= num_solutions)
+			if ((int) solutions.size() >= num_solutions)
 			{
 				m_State = SEARCH_STATE_SUCCEEDED;
 

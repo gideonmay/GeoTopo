@@ -316,9 +316,9 @@ double BSplineData< Degree , Real >::_dot( int depth1 ,  int off1 , int depth2 ,
 	else                return _dot / (1<<depth);
 }
 template< int Degree , class Real >
-double BSplineData< Degree , Real >::value( int depth ,  int off , double smoothingRadius ,  double s , bool d , bool inset ) const
+double BSplineData< Degree , Real >::value( int depth ,  int off , double smoothingRadius ,  double s , bool d , bool /* inset  */) const
 {
-    inset = inset;
+    // inset = inset;
 
 	PPolynomial< Degree+1 >  function;
 	PPolynomial< Degree   > dFunction;

@@ -50,8 +50,8 @@ private:
 
 
 bool read_stl(Surface_mesh& mesh, const std::string& filename){
-    typedef Vec3 Normal;
-    typedef Vec3 Texture_coordinate;
+//    typedef Vec3 Normal;
+//    typedef Vec3 Texture_coordinate;
     
     char                            line[100], *c;
     unsigned int                    i, nT;
@@ -157,7 +157,7 @@ bool read_stl(Surface_mesh& mesh, const std::string& filename){
                     for (c=line; isspace(*c) && *c!='\0'; ++c) {};
 
                     // read x, y, z
-                    sscanf(c+6, "%f %f %f", &p[0], &p[1], &p[2]);
+                    sscanf(c+6, "%lf %lf %lf", &p[0], &p[1], &p[2]);
 
                     // has vector been referenced before?
                     if ((vMapIt=vMap.find(p)) == vMap.end())

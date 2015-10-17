@@ -459,6 +459,11 @@ void TaskCurve::executeCurve(double t)
 				executeMorphCurve(t);
 		}
 		break;
+    case MERGE:
+	case SPLIT:
+		break;
+
+
 	}
 }
 

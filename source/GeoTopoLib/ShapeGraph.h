@@ -3,8 +3,8 @@
 #include "disjointset.h"
 
 // 64 bit
-#pragma warning (disable : 4267)
-#pragma warning (disable : 4018)
+// #pragma warning (disable : 4267)
+// #pragma warning (disable : 4018)
 
 namespace Structure
 {
@@ -18,13 +18,13 @@ struct Relation{
     Array1D_Vector3 deltas;
     PropertyMap property;
     Relation(Vector3 axis = Vector3(0, 0, 0), Vector3 point = Vector3(0, 0, 0), RelationType type = SELF)
-        : axis(axis), point(point), type(type) {}
+        : type(type), axis(axis), point(point) {}
     bool operator==(const Relation & other){ return this->parts == other.parts; }
 };
 
 struct Landmark : public Eigen::Vector3d{
     Landmark(unsigned int id = -1, const Eigen::Vector3d vec = Eigen::Vector3d(0, 0, 0)) :
-        id(id), Eigen::Vector3d(vec), constraint_id(-1){ u = v = -1; partid = "none"; }
+        Eigen::Vector3d(vec), id(id), constraint_id(-1){ u = v = -1; partid = "none"; }
     double u, v;
     QString partid;
     unsigned int id;
@@ -369,7 +369,7 @@ struct ShapeGraph : public Graph{
         // Sort curves
         std::vector <size_t> sorted;
         QMap<size_t, double> dists;
-        for (size_t r = 0; r < nodeIDs.size(); r++) dists[r] = curveCenters.row(r).dot(direction);
+        for (int r = 0; r < nodeIDs.size(); r++) dists[r] = curveCenters.row(r).dot(direction);
         for (auto p : sortQMapByValue(dists)) sorted.push_back(p.second);
 
         // Build sheet control points
@@ -448,7 +448,7 @@ struct ShapeGraph : public Graph{
 
             double theta = M_PI * 0.9;
             double threshold = ni->length() * 0.01;
-            double angle_threshold = abs(cos(theta));
+            double angle_threshold = std::abs(cos(theta));
 
             for (auto l : getEdges(ni->id))
             {
@@ -479,7 +479,7 @@ struct ShapeGraph : public Graph{
                 auto ti = midTangent(ni, meetingPoint(ni, nj), range);
                 auto tj = midTangent(nj, meetingPoint(nj, ni), range);
 
-                double dot_diagonals = abs(ti.dot(tj));
+                double dot_diagonals = std::abs(ti.dot(tj));
 
                 bool isAngle = angle_threshold < dot_diagonals;
 

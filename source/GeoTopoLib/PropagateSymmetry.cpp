@@ -61,7 +61,7 @@ void PropagateSymmetry::propagate(const QSet<QString> &fixedNodes, Structure::Sh
 
 			double angle = theta;
 
-			for (size_t i = idx; i < idx + relation.parts.size(); i++)
+			for (int i = idx; i < idx + (int) relation.parts.size(); i++)
 			{
 				if (idx == i) continue;
 				size_t j = i % relation.parts.size();

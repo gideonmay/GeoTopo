@@ -1,6 +1,7 @@
 #pragma once
 
 #include <assert.h>
+#include <cmath>
 #include <QVariant>
 #include <QMap>
 #include <QSet>
@@ -69,10 +70,10 @@ static inline std::vector<Eigen::Vector3d> noFrame(){
 }
 
 static inline Eigen::Vector3d orthogonalVector(const Eigen::Vector3d& n) {
-	if ((abs(n.y()) >= 0.9 * abs(n.x())) &&
-		abs(n.z()) >= 0.9 * abs(n.x())) return Eigen::Vector3d(0.0, -n.z(), n.y());
-	else if ( abs(n.x()) >= 0.9 * abs(n.y()) &&
-		abs(n.z()) >= 0.9 * abs(n.y()) ) return Eigen::Vector3d(-n.z(), 0.0, n.x());
+    if ((std::abs(n.y()) >= 0.9 * std::abs(n.x())) &&
+        std::abs(n.z()) >= 0.9 * std::abs(n.x())) return Eigen::Vector3d(0.0, -n.z(), n.y());
+    else if ( std::abs(n.x()) >= 0.9 * std::abs(n.y()) &&
+        std::abs(n.z()) >= 0.9 * std::abs(n.y()) ) return Eigen::Vector3d(-n.z(), 0.0, n.x());
 	else return Eigen::Vector3d(-n.y(), n.x(), 0.0);
 }
 
@@ -228,7 +229,7 @@ static std::vector<Eigen::Vector3d> refineByNumber(const std::vector<Eigen::Vect
 
 		// Remove not at end neighbor
 		int toRemoveIdx = idx;
-		if(idx == newPnts.size()-1) toRemoveIdx--;
+		if(idx == ((int) newPnts.size()-1)) toRemoveIdx--;
 
 		newPnts.erase( newPnts.begin() + toRemoveIdx );
 	}

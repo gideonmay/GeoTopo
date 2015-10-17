@@ -12,9 +12,12 @@
 #define STDEXT __gnu_cxx
 #endif
 #else
-#include <ext/hash_map>
-#include <ext/hash_set>
-#define STDEXT __gnu_cxx
+// #include <ext/hash_map>
+#include <unordered_map>
+#define hash_map unordered_map
+// #include <ext/hash_set>
+#define STDEXT std
+#if 0
 // It's terrible but gnu's hash_map needs an instantiation of hash() for
 // every key type! So we cast the pointer to void*
 namespace __gnu_cxx{
@@ -23,6 +26,7 @@ namespace __gnu_cxx{
 		size_t operator()(const void *ptr) const { return hash<unsigned long>::operator()((unsigned long)ptr); }
 	};
 }
+#endif
 #endif
 
 #include <vector>

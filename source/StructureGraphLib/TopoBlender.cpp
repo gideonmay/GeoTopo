@@ -823,7 +823,7 @@ void TopoBlender::equalizeSuperNodeTypes()
 	// iteratively determine the orientation and location of the new curves
 	while(!diffPairs.isEmpty())
     {
-        size_t numBefore = diffPairs.size();
+        int numBefore = diffPairs.size();
 
 		foreach(QString snodeID, diffPairs.keys())
 		{

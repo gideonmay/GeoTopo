@@ -8,6 +8,7 @@
 
 #include <time.h>
 #include <float.h>
+#include <cmath>
 #include <qgl.h>
 #include <QVector3D>
 #include "RenderObject.h"
@@ -30,7 +31,7 @@ namespace starlab{
 		QVector3 (const QVector3D& v){ this->setX(v.x());this->setY(v.y());this->setZ(v.z()); }
 		QVector3 (const Eigen::Vector3d& v){ this->setX(v.x());this->setY(v.y());this->setZ(v.z()); }
 		operator const Eigen::Vector3d() { return Eigen::Vector3d(x(),y(),z()); }
-		operator const QVector3D() { return *this; }
+//		operator const QVector3D() { return *this; }
 	};
 
 	class PolygonSoup : public RenderObject::Base{
@@ -394,10 +395,10 @@ namespace starlab{
 		}
 
 		static QVector3 orthogonalVector(const QVector3& n) {
-			if ((abs(n.y()) >= 0.9 * abs(n.x())) &&
-				abs(n.z()) >= 0.9 * abs(n.x())) return QVector3(0.0, -n.z(), n.y());
-			else if ( abs(n.x()) >= 0.9 * abs(n.y()) &&
-				abs(n.z()) >= 0.9 * abs(n.y()) ) return QVector3(-n.z(), 0.0, n.x());
+                        if ((std::abs(n.y()) >= 0.9 * std::abs(n.x())) &&
+                                std::abs(n.z()) >= 0.9 * std::abs(n.x())) return QVector3(0.0, -n.z(), n.y());
+                        else if ( std::abs(n.x()) >= 0.9 * std::abs(n.y()) &&
+                                std::abs(n.z()) >= 0.9 * std::abs(n.y()) ) return QVector3(-n.z(), 0.0, n.x());
 			else return QVector3(-n.y(), n.x(), 0.0);
 		}
 	};

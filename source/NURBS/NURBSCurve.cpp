@@ -69,8 +69,8 @@ NURBSCurve<Real> NURBSCurve<Real>::createCurve( Vector3 from, Vector3 to, int st
 template <typename Real>
 void NURBSCurve<Real>::CreateControl (const Array1D_Vector3 & ctrlPoint, const Array1D_Real & ctrlWeight)
 {
-    size_t newNumCtrlPoints = mNumCtrlPoints + mReplicate;
-    newNumCtrlPoints = newNumCtrlPoints;
+    // size_t newNumCtrlPoints = mNumCtrlPoints + mReplicate;
+    // newNumCtrlPoints = newNumCtrlPoints;
 
     mCtrlPoint = ctrlPoint;
 
@@ -116,7 +116,7 @@ bool NURBSCurve<Real>::IsLoop () const
 template <typename Real>
 void NURBSCurve<Real>::SetControlPoint (int i, const Vector3& ctrl)
 {
-    if (0 <= i && i < mNumCtrlPoints)
+    if (0 <= i && i < (int) mNumCtrlPoints)
     {
         // Set the control point.
         mCtrlPoint[i] = ctrl;
@@ -132,7 +132,7 @@ void NURBSCurve<Real>::SetControlPoint (int i, const Vector3& ctrl)
 template <typename Real>
 Vector3 NURBSCurve<Real>::GetControlPoint (int i) const
 {
-    if (0 <= i && i < mNumCtrlPoints)
+    if (0 <= i && i < (int) mNumCtrlPoints)
     {
         return mCtrlPoint[i];
     }
@@ -144,7 +144,7 @@ Vector3 NURBSCurve<Real>::GetControlPoint (int i) const
 template <typename Real>
 void NURBSCurve<Real>::SetControlWeight (int i, Real weight)
 {
-    if (0 <= i && i < mNumCtrlPoints)
+    if (0 <= i && i < (int) mNumCtrlPoints)
     {
         // Set the control weight.
         mCtrlWeight[i] = weight;
@@ -160,7 +160,7 @@ void NURBSCurve<Real>::SetControlWeight (int i, Real weight)
 template <typename Real>
 Real NURBSCurve<Real>::GetControlWeight (int i) const
 {
-    if (0 <= i && i < mNumCtrlPoints)
+    if (0 <= i && i < (int) mNumCtrlPoints)
     {
         return mCtrlWeight[i];
     }
@@ -416,7 +416,7 @@ void NURBSCurve<Real>::translateTo( const Vector3 & newPos, int cpIDX )
 {
     Vector3 cp = mCtrlPoint[cpIDX];
     Vector3 delta = newPos - cp;
-    for(int i = 0; i < GetNumCtrlPoints(); i++)
+    for(int i = 0; i < (int) GetNumCtrlPoints(); i++)
         mCtrlPoint[i] += delta;
 }
 
@@ -547,19 +547,19 @@ void NURBSCurve<Real>::refine(Array1D_Real & insknts, Array1D_Vector3 & Qw, Arra
     int b = findSpan(n,p,X[r],U) + 1;
 	
 	int j = 0;
-	for(j=0	 ; j<=a-p; j++)  Qw[j]		 = Pw[j];
-	for(j=b-1; j<=n	 ; j++)  Qw[j+r+1]	 = Pw[j];
-	for(j=0	 ; j<=a	 ; j++)  Ubar[j]	 = U[j];
-	for(j=b+p; j<=m	 ; j++)  Ubar[j+r+1] = U[j];
+	for(j=0	 ; j<=(int)a-p; j++)  Qw[j]		 = Pw[j];
+	for(j=b-1; j<=(int)n	 ; j++)  Qw[j+r+1]	 = Pw[j];
+	for(j=0	 ; j<=(int)a	 ; j++)  Ubar[j]	 = U[j];
+	for(j=b+p; j<=(int)m	 ; j++)  Ubar[j+r+1] = U[j];
 
-    size_t i = b+p-1;
-    size_t k = b+p+r;
+    int i = b+p-1;
+    int k = b+p+r;
 
 	Real alfa = 0;
 
     for (int j=r; j>=0; j--)
 	{
-		while (X[j] <= U[i] && i > a) {
+		while (X[j] <= (int) U[i] && i > (int)a) {
 			Qw[k-p-1] = Pw[i-p-1];
 			Ubar[k] = U[i];
 			k = k - 1;
@@ -615,14 +615,14 @@ Array1D_Real NURBSCurve<Real>::insertKnot(Real u, int k, int s, int r, Array1D_V
 	Rw.resize(p+1);
 
 	// Load new knot vector
-	for (int i=0; i<=k; i++)	UQ[i]	= UP[i];
-	for (int i=1; i<=r; i++)	UQ[k+i] = u;
-	for (int i=k+1; i<=mp; i++)	UQ[i+r] = UP[i];
+	for (int i=0; i<=(int) k; i++)	UQ[i]	= UP[i];
+	for (int i=1; i<=(int) r; i++)	UQ[k+i] = u;
+	for (int i=k+1; i<=(int) mp; i++)	UQ[i+r] = UP[i];
 
 	// Save unaltered control points
-	for (int i=0; i<=k-p; i++)	Qw[i]	= Pw[i];
-	for (int i=k-s; i<=np; i++)	Qw[i+r] = Pw[i];
-	for (int i=0; i<=p-s; i++)	Rw[i]	= Pw[k-p+i];
+	for (int i=0; i<=(int)k-p; i++)	Qw[i]	= Pw[i];
+	for (int i=k-s; i<=(int)np; i++)	Qw[i+r] = Pw[i];
+	for (int i=0; i<=(int)p-s; i++)	Rw[i]	= Pw[k-p+i];
 
 	// Insert the knot r times
 	for (int j=1; j<=r; j++) 

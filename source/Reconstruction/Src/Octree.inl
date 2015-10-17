@@ -177,7 +177,7 @@ int OctNode<NodeData,Real>::maxDepth(void) const{
 	if(!children){return 0;}
 	else{
 		int c,d;
-		for(int i=0;i<Cube::CORNERS;i++){
+		for(size_t i=0;i<Cube::CORNERS;i++){
 			d=children[i].maxDepth();
 			if(!i || d>c){c=d;}
 		}
@@ -189,7 +189,7 @@ int OctNode<NodeData,Real>::nodes(void) const{
 	if(!children){return 1;}
 	else{
 		int c=0;
-		for(int i=0;i<Cube::CORNERS;i++){c+=children[i].nodes();}
+		for(size_t i=0;i<Cube::CORNERS;i++){c+=children[i].nodes();}
 		return c+1;
 	}
 }
@@ -198,7 +198,7 @@ int OctNode<NodeData,Real>::leaves(void) const{
 	if(!children){return 1;}
 	else{
 		int c=0;
-		for(int i=0;i<Cube::CORNERS;i++){c+=children[i].leaves();}
+		for(size_t i=0;i<Cube::CORNERS;i++){c+=children[i].leaves();}
 		return c;
 	}
 }
@@ -208,7 +208,7 @@ int OctNode<NodeData,Real>::maxDepthLeaves(int maxDepth) const{
 	if(!children){return 1;}
 	else{
 		int c=0;
-		for(int i=0;i<Cube::CORNERS;i++){c+=children[i].maxDepthLeaves(maxDepth);}
+		for(size_t i=0;i<Cube::CORNERS;i++){c+=children[i].maxDepthLeaves(maxDepth);}
 		return c;
 	}
 }
@@ -771,7 +771,7 @@ OctNode<NodeData,Real>& OctNode<NodeData,Real>::operator = (const OctNode<NodeDa
 	for(i=0;i<DIMENSION;i++){this->offset[i] = node.offset[i];}
 	if(node.children){
 		initChildren();
-		for(i=0;i<Cube::CORNERS;i++){children[i] = node.children[i];}
+		for(size_t i=0;i<Cube::CORNERS;i++){children[i] = node.children[i];}
 	}
 	return *this;
 }

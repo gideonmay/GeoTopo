@@ -142,7 +142,9 @@ void MinimalAreaTriangulation<Real>::GetTriangulation(const size_t& i,const size
 	if(j+1>=ii)
 		return;
 	ii=midPoint[i*eCount+j];
-	if(ii>=0)
+
+    // XXX Gideon Always true
+	// if(ii>=0)
 	{
 		tIndex.idx[0] = int( i );
 		tIndex.idx[1] = int( j );

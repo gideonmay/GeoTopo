@@ -132,7 +132,7 @@ void StructureAnalysis::analyzeGroups(Structure::ShapeGraph * shape, bool isDebu
 					direction = Vector3(svd.matrixV().col(0)).normalized();
 					std::vector <size_t> sorted;
 					QMap<size_t, double> dists;
-					for (size_t pi = 0; pi < (int)r.parts.size(); pi++) dists[pi] = curveCenters.row(pi).dot(direction);
+					for (int pi = 0; pi < (int)r.parts.size(); pi++) dists[pi] = curveCenters.row(pi).dot(direction);
 					for (auto p : sortQMapByValue(dists)) sorted.push_back(p.second);
 
 					QStringList sortedParts;
@@ -150,7 +150,7 @@ void StructureAnalysis::analyzeGroups(Structure::ShapeGraph * shape, bool isDebu
 				// Sort parts by angle around axis
 				QStringList sorted;
 				QMap<QString, double> angles;
-				for (size_t i = 0; i < r.parts.size(); i++)
+				for (int i = 0; i < r.parts.size(); i++)
 				{
 					double angle = signedAngle(centers[0], centers[i], r.axis);
 					if (angle < 0) angle = (M_PI * 2) + angle;
@@ -160,7 +160,7 @@ void StructureAnalysis::analyzeGroups(Structure::ShapeGraph * shape, bool isDebu
 				r.parts = sorted;
 
 				// Vector from part's head to centroid
-				for (size_t i = 0; i < r.parts.size(); i++)
+				for (int i = 0; i < r.parts.size(); i++)
 					r.deltas.push_back(centroid - shape->getNode(r.parts[i])->position(Eigen::Vector4d(0.5, 0.5, 0, 0)));
 			}
 		}
@@ -300,7 +300,7 @@ void StructureAnalysis::updateRelation(Structure::ShapeGraph * shape, Structure:
 		r.axis = plane.second;
 
 		// Vector from part's head to centroid
-		for (size_t i = 0; i < r.parts.size(); i++)
+		for (int i = 0; i < r.parts.size(); i++)
 			r.deltas[i] = centroid - shape->getNode(r.parts[i])->position(Eigen::Vector4d(0.5, 0.5, 0, 0));
 	}
 }

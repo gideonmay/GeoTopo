@@ -4,6 +4,7 @@
 #include <QFile>
 #include <algorithm>
 #include <fstream>
+#include <cmath>
 
 #include "GraphDistance.h"
 
@@ -639,7 +640,7 @@ void GraphCorresponder::computeOrientationDiffMatrix( MATRIX & M )
 
 				vec1.normalize();
 				vec2.normalize();
-                M[i][j] = 1.0 - abs(vec1.dot(vec2));
+                M[i][j] = 1.0 - std::abs(vec1.dot(vec2));
 			}
 		}
 	}

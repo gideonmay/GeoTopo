@@ -280,15 +280,15 @@ template <typename Real>
 void NURBSRectangle<Real>::SetControlPoint (int uIndex, int vIndex,
     const Vector3& ctrl)
 {
-    if (0 <= uIndex && uIndex < mNumUCtrlPoints
-    &&  0 <= vIndex && vIndex < mNumVCtrlPoints)
+    if (0 <= uIndex && uIndex < (int) mNumUCtrlPoints
+    &&  0 <= vIndex && vIndex < (int) mNumVCtrlPoints)
     {
         // Set the control point.
         mCtrlPoint[uIndex][vIndex] = ctrl;
 
         // Set the replicated control point.
-        bool doUReplicate = (uIndex < mUReplicate);
-        bool doVReplicate = (vIndex < mVReplicate);
+        bool doUReplicate = (uIndex < (int) mUReplicate);
+        bool doVReplicate = (vIndex < (int) mVReplicate);
         int uExt = 0, vExt = 0;
 
         if (doUReplicate)
@@ -312,8 +312,8 @@ template <typename Real>
 Vector3 NURBSRectangle<Real>::GetControlPoint (int uIndex,
     int vIndex) const
 {
-    if (0 <= uIndex && uIndex < mNumUCtrlPoints
-    &&  0 <= vIndex && vIndex < mNumVCtrlPoints)
+    if (0 <= uIndex && uIndex < (int) mNumUCtrlPoints
+    &&  0 <= vIndex && vIndex < (int) mNumVCtrlPoints)
     {
         return mCtrlPoint[uIndex][vIndex];
     }
@@ -326,15 +326,15 @@ template <typename Real>
 void NURBSRectangle<Real>::SetControlWeight (int uIndex, int vIndex,
     Real weight)
 {
-    if (0 <= uIndex && uIndex < mNumUCtrlPoints
-    &&  0 <= vIndex && vIndex < mNumVCtrlPoints)
+    if (0 <= uIndex && uIndex < (int) mNumUCtrlPoints
+    &&  0 <= vIndex && vIndex < (int) mNumVCtrlPoints)
     {
         // Set the control weight.
         mCtrlWeight[uIndex][vIndex] = weight;
 
         // Set the replicated control weight.
-        bool doUReplicate = (uIndex < mUReplicate );
-        bool doVReplicate = (vIndex < mVReplicate);
+        bool doUReplicate = (uIndex < (int) mUReplicate );
+        bool doVReplicate = (vIndex < (int) mVReplicate);
         size_t uExt = 0, vExt = 0;
 
         if (doUReplicate)
@@ -357,8 +357,8 @@ void NURBSRectangle<Real>::SetControlWeight (int uIndex, int vIndex,
 template <typename Real>
 Real NURBSRectangle<Real>::GetControlWeight (int uIndex, int vIndex) const
 {
-    if (0 <= uIndex && uIndex < mNumUCtrlPoints
-    &&  0 <= vIndex && vIndex < mNumVCtrlPoints)
+    if (0 <= uIndex && uIndex < (int) mNumUCtrlPoints
+    &&  0 <= vIndex && vIndex < (int) mNumVCtrlPoints)
     {
         return mCtrlWeight[uIndex][vIndex];
     }
@@ -1115,7 +1115,7 @@ void NURBSRectangle<Real>::refineU( Array1D_Real & insknts, Array2D_Vector3 & Qw
 	Qw.clear();
 	Qw.resize( mNumUCtrlPoints + insknts.size(), Array1D_Vector3(mNumVCtrlPoints, Vector3(0,0,0)) );
 
-	for(int v = 0; v < mNumVCtrlPoints; v++)
+	for(size_t v = 0; v < mNumVCtrlPoints; v++)
 	{
 		NURBSCurve<Real> curveU = NURBSCurve<Real>::createCurveFromPoints( GetControlPointsU(v) );
 		

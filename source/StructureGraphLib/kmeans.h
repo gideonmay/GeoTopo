@@ -49,6 +49,7 @@ namespace kmeansFast
 	/* 
 	   A C-program for MT19937, with initialization improved 2002/1/26.
 	   Coded by Takuji Nishimura and Makoto Matsumoto.
+    */
 	/* Period parameters */  
 	#define N_N 624
 	#define M_M 397

@@ -1253,12 +1253,12 @@ void SynthesisManager::makeProxies(int numSides, int numSpineJoints)
             Array2D_Vector3 crossSections = SynthesisManager::proxyRays( spine, spineNormals, numSides );
 
             // Sample surface
-            for(int i = 0; i < crossSections.size(); i++)
+            for(unsigned int i = 0; i < crossSections.size(); i++)
             {
                 // Get spine index position
                 int si = i - ((numSides * 0.5) - 1);
                 if(si < 0) si = 0;
-                if(si > spine.size() - 1) si = spine.size() - 1;
+                if(si > (int) spine.size() - 1) si = spine.size() - 1;
 
                 Vector3 p = spine[si];
 
@@ -1375,21 +1375,21 @@ std::vector<SimplePolygon> SynthesisManager::drawWithProxies(Graph *g)
         bool isWireframe = false;
         if( proxyOptions["isDebug"].toBool() ) isWireframe = true;
 
-        for(int i = 0; i + 1 < crossSections.size(); i++)
+        for(unsigned int i = 0; i + 1 < crossSections.size(); i++)
         {
             // Get spine index position
             int si = i - ((numSides * 0.5) - 1);
             if(si < 0) si = 0;
-            if(si > spine.size() - 1) si = spine.size() - 1;
+            if(si > (int) spine.size() - 1) si = spine.size() - 1;
 
             Vector3 p0 = spine[si];
-            if(i < ((numSides * 0.5) - 1) || si+1 == spine.size()) si--;
+            if(i < ((numSides * 0.5) - 1) || si+1 == (int) spine.size()) si--;
             Vector3 p1 = spine[si+1];
 
             std::vector<Vector3> cA = crossSections[i];
             std::vector<Vector3> cB = crossSections[i+1];
 
-            for(size_t j = 0; j + 1 < cA.size(); j++)
+            for(unsigned int j = 0; j + 1 < cA.size(); j++)
             {
                 QVector<Vector3> polygon;
 
