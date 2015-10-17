@@ -5,6 +5,7 @@
 #include <QStack>
 #include <QColor>
 #include <QVector3D>
+#include <QVariant>
 #include <vector>
 
 #ifdef SPLAT_RENDERING

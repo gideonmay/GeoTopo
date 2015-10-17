@@ -1,9 +1,10 @@
 # Eigen library
 include($$PWD/../external/Eigen/Eigen.prf)
 
+mac{ CONFIG += c++11 }
+
 # Warnings
 win32{QMAKE_CXXFLAGS *= /wd4800 /wd4244 /wd4267}
-
 TEMPLATE = lib
 CONFIG += staticlib
 QT += opengl

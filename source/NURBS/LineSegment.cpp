@@ -25,12 +25,12 @@ Line::Line( const Vector3& from, const Vector3& to, int i)
 	index = i;
 }
 
-Line::Line( const Vector3& start, const Vector3& direction, double length, int i)
+Line::Line( const Vector3& start, const Vector3& direction, double l, int i)
 {
 	a = start;
-	b = start + (direction.normalized() * length);
+	b = start + (direction.normalized() * l);
 
-	length = length;
+	length = l;
 
 	index = i;
 }
@@ -185,8 +185,8 @@ void Line::intersectLine( const Line& S2, Vector3 & pa, Vector3 & pb, double Eps
 		}
 	}
 	// finally do the division to get sc and tc
-	sc = (abs(sN) < EPS ? 0.0 : sN / sD);
-	tc = (abs(tN) < EPS ? 0.0 : tN / tD);
+	sc = (std::abs(sN) < EPS ? 0.0 : sN / sD);
+	tc = (std::abs(tN) < EPS ? 0.0 : tN / tD);
 
 	pa = this->pointAt(sc);
 	pb = S2.pointAt(tc);

@@ -17,3 +17,5 @@ win32{
 
 # C++11 support on linux
 linux-g++{ CONFIG += c++11 warn_off }
+
+mac{ CONFIG += c++11 }

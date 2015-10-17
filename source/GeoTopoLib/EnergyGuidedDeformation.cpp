@@ -14,7 +14,7 @@
 
 #include "myglobals.h"
 
-#include <omp.h>
+// #include <omp.h>
 
 void Energy::GuidedDeformation::preprocess(Structure::ShapeGraph * shapeA, Structure::ShapeGraph * shapeB)
 {

@@ -50,3 +50,6 @@ win32{
     QMAKE_CXXFLAGS *= /openmp
     QMAKE_CXXFLAGS *= /MP
 }
+mac {
+    CONFIG += c++11
+}

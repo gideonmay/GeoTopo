@@ -122,7 +122,7 @@ size_t uniqueVector( std::vector<T> & p, std::vector<int> & xrefs, HashFunction 
 	size_t * const hashTable = new size_t[hashSize + N];	// hash table + linked list
 	size_t * const next = hashTable + hashSize;				// use bottom part as linked list
 
-	memset( hashTable, NIL, hashSize*sizeof(size_t) );		// init hash table (NIL = 0xFFFFFFFF so memset works)
+	memset( hashTable, NIL & 0xFF, hashSize*sizeof(size_t) );		// init hash table (NIL = 0xFFFFFFFF so memset works)
 
 	// xrefs and p have the same size.
 	xrefs.resize(N);
