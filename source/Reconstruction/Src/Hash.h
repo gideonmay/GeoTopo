@@ -4,6 +4,10 @@
 #include <hash_map>
 using stdext::hash_map;
 #else // !WIN32
+#include <unordered_map>
+#define hash_map unordered_map
+using std::unordered_map;
+#if 0
 #include <ext/hash_map>
 using namespace __gnu_cxx;
 
@@ -24,6 +28,7 @@ namespace __gnu_cxx
     size_t operator()(const unsigned long long __x) const { return __x; }
   };
 }
+#endif
 #endif // WIN32
 #endif // HASH_INCLUDED
 
